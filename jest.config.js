@@ -6,4 +6,5 @@ module.exports = {
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageReporters: ['html', 'text'],
+  projects: '<rootDir>/packages\\nx-setup-e2e',
 };

@@ -27,6 +27,13 @@
   "projects": {
     "plugins-docker": {
       "tags": ["plugin"]
+    },
+    "nx-setup": {
+      "tags": []
+    },
+    "nx-setup-e2e": {
+      "tags": [],
+      "implicitDependencies": ["nx-setup"]
     }
   },
   "workspaceLayout": {

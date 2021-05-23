@@ -48,6 +48,76 @@
           }
         }
       }
+    },
+    "nx-setup": {
+      "root": "packages/nx-setup",
+      "sourceRoot": "packages/nx-setup/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["packages/nx-setup/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/packages/nx-setup"],
+          "options": {
+            "jestConfig": "packages/nx-setup/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/packages/nx-setup",
+            "tsConfig": "packages/nx-setup/tsconfig.lib.json",
+            "packageJson": "packages/nx-setup/package.json",
+            "main": "packages/nx-setup/src/index.ts",
+            "assets": [
+              "packages/nx-setup/*.md",
+              {
+                "input": "./packages/nx-setup/src",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/nx-setup/src",
+                "glob": "**/*.d.ts",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/nx-setup",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/nx-setup",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nx-setup-e2e": {
+      "projectType": "application",
+      "root": "packages\\nx-setup-e2e",
+      "sourceRoot": "packages\\nx-setup-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nx-setup:build",
+            "npmPackageName": "@semantic-release-plus/nx-setup",
+            "pluginOutputPath": "dist/packages/nx-setup",
+            "jestConfig": "packages/nx-setup-e2e/jest.config.js"
+          }
+        }
+      }
     }
   },
   "cli": {
