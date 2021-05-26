@@ -15,7 +15,10 @@
               "packages/plugins/docker/tsconfig.lib.json",
               "packages/plugins/docker/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!packages/plugins/docker/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!packages/plugins/docker/**/*"
+            ]
           }
         },
         "test": {
@@ -34,7 +37,9 @@
             "packageJson": "packages/plugins/docker/package.json",
             "generatePackageJson": true,
             "main": "packages/plugins/docker/src/index.ts",
-            "assets": ["packages/plugins/docker/*.md"]
+            "assets": [
+              "packages/plugins/docker/*.md"
+            ]
           }
         },
         "release": {
@@ -57,20 +62,16 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/nx-setup/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/packages/nx-setup"],
-          "options": {
-            "jestConfig": "packages/nx-setup/jest.config.js",
-            "passWithNoTests": true
+            "lintFilePatterns": [
+              "packages/nx-setup/**/*.ts"
+            ]
           }
         },
         "build": {
           "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/packages/nx-setup",
             "tsConfig": "packages/nx-setup/tsconfig.lib.json",
@@ -99,6 +100,22 @@
                 "output": "."
               }
             ]
+          }
+        },
+        "build-plugin": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "nx run nx-setup:build"
+          }
+        },
+        "link-plugin": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd ./dist/packages/nx-setup && yarn link",
+              "yarn link @semantic-release-plus/nx-setup"
+            ],
+            "parallel": false
           }
         }
       }

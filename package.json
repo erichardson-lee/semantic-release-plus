@@ -24,8 +24,7 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "setup-local-plugins": "ts-node tools/scripts/setup-local-plugins.ts",
-    "postinstall": "yarn setup-local-plugins"
+    "register-local-nx-plugins": "nx run-many --target=build-plugin --all && nx run-many --target=link-plugin --all"
   },
   "private": true,
   "dependencies": {
